@@ -10,9 +10,9 @@ export class ProductsService {
 
   
   protected _baseAddress ="https://fakestoreapi.com/products";
-  //protected _products = new BehaviorSubject<Product[]>([]);
+  
   constructor(protected http: HttpClient) {
-  //  this.getProducts().subscribe(e => this._products.next(e));
+ 
    
 }
 
@@ -30,7 +30,5 @@ protected handleError(error: HttpErrorResponse) {
     return throwError(() => error);
 }
 
-//products(): Observable<Product[]> {
-//    return this._products.asObservable();
-//}
+
 }

@@ -1,5 +1,11 @@
-<nav>
-    <a routerLink="/productList">Home</a>
-    <a routerLink="/cart">Shopping Cart</a>
-    <a routerLink="/cart">Items in cart - 2</a>
+<div class="container">
+  <header>
+  <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+<nav class="nav d-flex justify-content-between">
+    <a routerLink="/productList" class ="p-2 link-secondary">Home</a>
+    <a routerLink="/cart" class ="p-2 link-secondary">Shopping Cart</a>
   </nav>
+  <div class="d-inline-flex mt-2 mt-md-0 ms-md-auto">Items in cart - {{numberOfCartItems}} </div>
+</div>
+</header>
+</div>

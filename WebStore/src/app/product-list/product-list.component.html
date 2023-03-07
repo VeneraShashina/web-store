@@ -1,9 +1,14 @@
-<h1>Products</h1>
-<ul>
-    <li *ngFor="let product of products">
-      <a routerLink="/product/{{product.id}}">
-        <span class="badge">{{product.id}}</span> {{product.title}}
+<div class="container">
+<h3>Products</h3>
+ <ul class="list-group">
+    <li *ngFor="let product of products" class="list-group-item d-flex justify-content-between align-items-center">
+      <a routerLink="/product/{{product.id}}" class="p-2 link-dark"> 
+        <span >{{product.title}}</span> 
       </a>
-  
+    <div>
+      <a routerLink="/product/{{product.id}}" class="p-5 link-dark">  <span> {{product.price|currency}}</span></a>
+      <button type="button" (click)="addToCart(product)" class="btn btn-outline-secondary"> Add to cart</button>
+    </div>
     </li>
   </ul>
+</div>
