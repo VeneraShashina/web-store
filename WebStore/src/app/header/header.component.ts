@@ -11,7 +11,7 @@ export class HeaderComponent {
 
   numberOfCartItems: number = 0;
   constructor(private cartService: CartService) {
-    cartService.items().subscribe(i => this.numberOfCartItems = i.length);
+    cartService.itemsCount().subscribe(n => this.numberOfCartItems = n);
   }
 
 }

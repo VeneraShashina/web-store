@@ -8,11 +8,11 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/productList', pathMatch: 'full' },
   { path: 'productList', component: ProductListComponent },
-  
-  { path: 'product/:id', component: ProductComponent },
-  { path: 'cart', component: ShoppingCartComponent }
+  { path: 'cart', component: ShoppingCartComponent },
+  { path: 'product/:id', component: ProductComponent }
+ 
   
 ];
 

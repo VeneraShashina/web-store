@@ -8,21 +8,33 @@ import { Product } from 'src/model/product';
 })
 export class CartService {
   protected _items = new BehaviorSubject<CartItem[]>([]);
+  protected _itemsCount = new BehaviorSubject<number>(0);
 
-  constructor() { }
+  constructor() {
+this.items().subscribe(i=>
+  this._itemsCount.next(
+    i.reduce((n,{quantity})=>n+quantity,0)));
+
+   }
 
   items(): Observable<CartItem[]> {
     return this._items.asObservable();
   }
+  itemsCount(): Observable<number> {
+    return this._itemsCount.asObservable();
+  }
 
-  
+
   addItem(product: Product) {
-    let item = this._items.getValue().find(i => i.product.id == product.id);
-    if (!item) {
-      let newItem: CartItem = { product: product, quantity: 1 };
-      let items = this._items.getValue();
-      items.push(newItem);
-      this._items.next(items);
-    }
+
+    let itemsToUpdate = this._items.getValue();
+    let itemIndex = itemsToUpdate.findIndex(i => i.product.id == product.id);
+    console.log(itemIndex);
+    if (itemIndex>=0)
+      itemsToUpdate[itemIndex].quantity += 1;
+    else
+      itemsToUpdate.push({ product: product, quantity: 1 });
+
+    this._items.next(itemsToUpdate);
   }
 }
