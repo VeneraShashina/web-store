@@ -12,6 +12,6 @@ import { CartService } from '../services/cart.service';
 export class ShoppingCartComponent {
   items: CartItem[] = []
   constructor(private cartService: CartService) {
-    cartService.items().subscribe(i => this.items = i);
+    cartService.cartStatus().subscribe(c => this.items =c.items);
   }
 }

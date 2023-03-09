@@ -1,4 +1,5 @@
 <div class="container">
+    <app-cart-total/>
     <h4>List of cart</h4>
     <span *ngIf="items.length==0">No items in cart</span>
     <ul class="list-group">
@@ -8,7 +9,7 @@
             </a>
             <div>
                 <span class="p-2">qty: {{item.quantity|number}}</span>
-                <span> {{item.quantity*item.product.price|currency}}</span>
+                <span> {{item.totalPrice|currency}}</span>
             </div>
         </li>
     </ul>
