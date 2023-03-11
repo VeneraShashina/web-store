@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CartTotalComponent } from './cart-total/cart-total.component';
+import { ProductLineComponent } from './product-line/product-line.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CartTotalComponent } from './cart-total/cart-total.component';
     ProductListComponent,
     HeaderComponent,
     ShoppingCartComponent,
-    CartTotalComponent
+    CartTotalComponent,
+    ProductLineComponent
   ],
   imports: [
     BrowserModule,

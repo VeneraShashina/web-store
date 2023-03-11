@@ -10,8 +10,7 @@ import { CartService } from '../services/cart.service';
 
 
 export class ShoppingCartComponent {
-  items: CartItem[] = []
+  items: CartItem[] = this.cartService.getItems();
   constructor(private cartService: CartService) {
-    cartService.cartStatus().subscribe(c => this.items =c.items);
   }
 }

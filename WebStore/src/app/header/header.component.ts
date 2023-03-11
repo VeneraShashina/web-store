@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -9,9 +10,8 @@ import { CartService } from '../services/cart.service';
 
 export class HeaderComponent {
 
-  numberOfCartItems: number = 0;
+  numberOfCartItems$: Observable<number> ;
   constructor(private cartService: CartService) {
-    cartService.cartStatus().subscribe(c => this.numberOfCartItems = c.totalQuantity);
+   this.numberOfCartItems$=cartService.getTotalQuantity$();
   }
-
 }

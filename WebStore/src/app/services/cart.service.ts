@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, find, map, pipe, Observable, Observer } from 'rxjs';
 import { CartItem } from 'src/model/cartItem';
 import { CartStatus } from 'src/model/cartStatus';
 import { Product } from 'src/model/product';
@@ -9,37 +9,40 @@ import { Product } from 'src/model/product';
 })
 export class CartService {
 
-  protected _cartStatus = new BehaviorSubject<CartStatus>({ items: [], totalQuantity: 0, totalPrice: 0 })
-  constructor() {
-  }
+  protected _cartItems: CartItem[] = [];
+  protected cartItems = new BehaviorSubject<CartItem[]>([]);
 
-  cartStatus(): Observable<CartStatus> {
-    return this._cartStatus.asObservable();
+  constructor() {
   }
 
 
   addItem(product: Product) {
 
-    let updatedCart = this._cartStatus.getValue();
-    let itemIndex = updatedCart.items.findIndex(i => i.product.id == product.id);
+    let itemIndex = this._cartItems.findIndex(i => i.product.id == product.id);
     if (itemIndex >= 0) {
-      updatedCart.items[itemIndex].quantity += 1;
-      updatedCart.items[itemIndex].totalPrice = updatedCart.items[itemIndex].product.price * updatedCart.items[itemIndex].quantity;
+      this._cartItems[itemIndex].quantity += 1;
+      this._cartItems[itemIndex].totalPrice = this._cartItems[itemIndex].product.price * this._cartItems[itemIndex].quantity;
     }
     else
-      updatedCart.items.push({ product: product, quantity: 1, totalPrice: product.price });
-      
-    updatedCart.totalPrice = this.getTotalPrice(updatedCart.items);
-    updatedCart.totalQuantity = this.getTotalQuantity(updatedCart.items);
+      this._cartItems.push({ product: product, quantity: 1, totalPrice: product.price });
 
-    this._cartStatus.next(updatedCart);
+      this.cartItems.next(this._cartItems);
   }
 
-  getTotalQuantity(items: CartItem[]): number {
-    return items.reduce((n, { quantity }) => n + quantity, 0);
+  getTotalQuantity$() {
+    return this.cartItems.pipe(map((c)=>
+     c.reduce((n, { quantity }) => n + quantity, 0))
+      );
+
   }
 
-  getTotalPrice(items: CartItem[]): number {
-    return items.reduce((n, { totalPrice }) => n + totalPrice, 0);
+ 
+  getTotalPrice() {
+    return this._cartItems.reduce((n, { totalPrice }) => n + totalPrice, 0);
   }
+
+  getItems() {
+    return this._cartItems;
+  }
+
 }

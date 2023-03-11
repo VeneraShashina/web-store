@@ -8,8 +8,7 @@ import { CartService } from '../services/cart.service';
 })
 export class CartTotalComponent {
 
-  totalPrice:number=0;
+  totalPrice:number=this.cartService.getTotalPrice();
   constructor(private cartService: CartService) {
-    cartService.cartStatus().subscribe(c => this.totalPrice =c.totalPrice);
   }
 }
