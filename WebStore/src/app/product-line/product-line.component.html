@@ -1,0 +1,5 @@
+<a routerLink="/product/{{product.id}}" class="p-2 link-dark"> 
+    <span >{{product.title}}</span> 
+  </a>
+  <a routerLink="/product/{{product.id}}" class="p-5 link-dark">  <span> {{product.price|currency}}</span></a>
+  <button type="button" (click)="addProduct(product)" class="btn btn-outline-secondary"> Add to cart</button>
