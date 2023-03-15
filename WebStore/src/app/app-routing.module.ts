@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'cart', loadChildren: () => import('./shopping-cart/shopping-cart.module').then(
-      (m) => m.ShoppngCartModule
+      (m) => m.ShoppingCartModule
     )
   },
   { path: 'product/:id', component: ProductComponent }

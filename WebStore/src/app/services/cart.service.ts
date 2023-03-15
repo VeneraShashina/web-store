@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, find, map, pipe, Observable, Observer } from 'rxjs';
+import {Store} from '@ngrx/store'
 import { CartItem } from 'src/app/model/cartItem';
 import { CartStatus } from 'src/app/model/cartStatus';
 import { Product } from 'src/app/model/product';
@@ -13,6 +14,8 @@ export class CartService {
   protected cartItems = new BehaviorSubject<CartItem[]>([]);
 
   constructor() {
+    //this.store.dispatch({type: "LOAD_CART"});
+    //this.store.subscribe(state=>(this._cartItems=state.items))
   }
 
 
@@ -43,6 +46,7 @@ export class CartService {
 
   getItems() {
     return this._cartItems;
+
   }
 
 }
