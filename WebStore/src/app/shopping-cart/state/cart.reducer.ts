@@ -2,6 +2,7 @@ import * as fromRoot from "../../state/app-state"
 import { CartAction, CartActionTypes } from "./cart.actions";
 import {createFeatureSelector, createSelector} from "@ngrx/store"
 import { CartState } from "./cart-state";
+import { CartHelper } from "src/app/services/carthelper";
   export interface AppState extends fromRoot.AppState {
     cart: CartState
   }
@@ -72,7 +73,7 @@ export function shoppingCartReducer(state: CartState = initialState, action: Car
         case CartActionTypes.ADD_CART_ITEM: {
             return {
                 ...state,
-                items:state.items.concat([{product: action.payload, quantity:1, totalPrice:action.payload.price}])
+                items: CartHelper.addItem(state.items, action.payload)
             };
         }
         case CartActionTypes.ADD_CART_ITEM_SUCCESS:{
@@ -116,5 +117,5 @@ export const getCartItems= createSelector(
 
 export const getCartTotalQty= createSelector(
     getShoppingCartFeatureState,
-    (state:CartState) => state.items.reduce((n, { quantity }) => n + quantity, 0)
+    (state:CartState) => CartHelper.getTotalQuantity(state.items)
 )
