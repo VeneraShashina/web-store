@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Product } from 'src/app/model/product';
 import { CartService } from '../services/cart.service';
 import { ProductsService } from '../services/products.service';
+import { CartActionTypes } from '../shopping-cart/state/cart.actions';
+import * as fromCartState from '../shopping-cart/state/cart.reducer'
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +15,7 @@ export class ProductListComponent {
 
   products:Product[]=[];
 
-  constructor(private productsService: ProductsService, private cartService: CartService)
+  constructor(private productsService: ProductsService, private cartService: CartService, private store: Store<fromCartState.AppState>)
   {}
   ngOnInit(): void {
     this.getProducts();
@@ -25,7 +28,8 @@ export class ProductListComponent {
 
   addToCart(product:Product)
   {
-    this.cartService.addItem(product);
+    //this.cartService.addItem(product);
+    this.store.dispatch({type: CartActionTypes.ADD_CART_ITEM, payload: product});
   }
 
 }

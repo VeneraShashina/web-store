@@ -10,7 +10,7 @@ import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
   declarations: [ShoppingCartComponent, CartTotalComponent],
   imports: [CommonModule, 
     ShoppingCartRoutingModule,
-    StoreModule.forFeature("cart", shoppingCartReducer)
+   // StoreModule.forFeature("cart", shoppingCartReducer)
   ],
   exports: [ShoppingCartComponent,CartTotalComponent]
 })

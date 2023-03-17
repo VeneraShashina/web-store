@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store'
 import { CartItem } from 'src/app/model/cartItem';
 import { CartStatus } from 'src/app/model/cartStatus';
 import { Product } from 'src/app/model/product';
+import { CartActionTypes } from '../shopping-cart/state/cart.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,16 @@ export class CartService {
   protected _cartItems: CartItem[] = [];
   protected cartItems = new BehaviorSubject<CartItem[]>([]);
 
-  constructor() {
+  constructor(private store: Store<any>) {
     //this.store.dispatch({type: "LOAD_CART"});
     //this.store.subscribe(state=>(this._cartItems=state.items))
+
+   /* this.store.dispatch({ type:  CartActionTypes.LOAD_CART});
+    console.log('dispatched');
+   this.store.subscribe(state=>{
+     console.log(state);
+     this._cartItems=state.cart.items;
+     console.log('loaded');});  */
   }
 
 
