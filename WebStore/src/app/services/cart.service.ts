@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, find, map, pipe, Observable, Observer } from 'rxjs';
 import { CartItem } from 'src/app/model/cartItem';
-import { CartStatus } from 'src/app/model/cartStatus';
 import { Product } from 'src/app/model/product';
 import { CartActionTypes } from '../shopping-cart/state/cart.actions';
 import { Store , select} from '@ngrx/store';

@@ -29,7 +29,6 @@ export class ProductListComponent {
   addToCart(product:Product)
   {
     this.cartService.addItem(product);
-    //this.store.dispatch({type: CartActionTypes.ADD_CART_ITEM, payload: product});
   }
 
 }

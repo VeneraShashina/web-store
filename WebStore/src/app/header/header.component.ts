@@ -14,7 +14,7 @@ import * as fromCartState from '../shopping-cart/state/cart.reducer'
 export class HeaderComponent {
 
   numberOfCartItems$: Observable<number> ;
-  constructor(private cartService: CartService)//, private store: Store<fromCartState.AppState>)
+  constructor(private cartService: CartService)
    {
    this.numberOfCartItems$=
    cartService.getTotalQuantity$();
