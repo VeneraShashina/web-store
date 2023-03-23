@@ -4,7 +4,6 @@ import { CartItem } from "../../model/cartItem";
 //import { CartItem } from "./cartItem";
 export interface CartState {
     items: CartItem[];
-    loading: boolean;
     loaded: boolean;
     error: string;
 

@@ -11,36 +11,16 @@ import * as fromCartState from '../shopping-cart/state/cart.reducer'
 })
 export class CartService {
 
-//  protected _cartItems: CartItem[] = [];
-  //protected cartItems = new BehaviorSubject<CartItem[]>([]);
   cartItems$ =new Observable<CartItem[]>;
   constructor(private store: Store<any>) {
     
-    this.store.dispatch({type: "LOAD_CART"});
-  //  this.store.subscribe(state=>(this._cartItems=state.items))
-    this.cartItems$ = this.store.pipe(select(fromCartState.getCartItems))
-    console.log('CartService');
-    this.cartItems$.subscribe(c=>console.log(c))
-   /* this.store.dispatch({ type:  CartActionTypes.LOAD_CART});
-    console.log('dispatched');
-   this.store.subscribe(state=>{
-     console.log(state);
-     this._cartItems=state.cart.items;
-     console.log('loaded');});  */
+    this.store.dispatch({type: CartActionTypes.LOAD_CART});
+    this.cartItems$ = this.store.pipe(select(fromCartState.getCartItems$))
   }
 
 
   addItem(product: Product) {
-    this.store.dispatch({type: "ADD_CART_ITEM", payload:product});
-   /* let itemIndex = this._cartItems.findIndex(i => i.product.id == product.id);
-    if (itemIndex >= 0) {
-      this._cartItems[itemIndex].quantity += 1;
-      this._cartItems[itemIndex].totalPrice = this._cartItems[itemIndex].product.price * this._cartItems[itemIndex].quantity;
-    }
-    else
-      this._cartItems.push({ product: product, quantity: 1, totalPrice: product.price });
-
-      this.cartItems.next(this._cartItems);*/
+    this.store.dispatch({type: CartActionTypes.ADD_CART_ITEM, payload:product});
   }
 
   removeItem(item: CartItem) {
@@ -48,22 +28,11 @@ export class CartService {
   }
 
   getTotalQuantity$() {
-    return this.cartItems$.pipe(map((c)=>
-     c.reduce((n, { quantity }) => n + quantity, 0))
-      );
+    return this.store.pipe(select(fromCartState.getCartTotalQty$))
 
   }
 
- 
   getTotalPrice$() {
-  return this.cartItems$.pipe(map((c)=>
-     c.reduce((n, { totalPrice }) => n + totalPrice, 0))
-      );
+    return this.store.pipe(select(fromCartState.getCartTotalPrice$))
   }
-
- /* getItems() {
-    return this._cartItems;
-
-  }*/
-
 }
