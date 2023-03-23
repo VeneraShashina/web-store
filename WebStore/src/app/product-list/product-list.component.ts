@@ -15,7 +15,7 @@ export class ProductListComponent {
 
   products:Product[]=[];
 
-  constructor(private productsService: ProductsService, private cartService: CartService, private store: Store<fromCartState.AppState>)
+  constructor(private productsService: ProductsService, private cartService: CartService)
   {}
   ngOnInit(): void {
     this.getProducts();
@@ -28,8 +28,8 @@ export class ProductListComponent {
 
   addToCart(product:Product)
   {
-    //this.cartService.addItem(product);
-    this.store.dispatch({type: CartActionTypes.ADD_CART_ITEM, payload: product});
+    this.cartService.addItem(product);
+    //this.store.dispatch({type: CartActionTypes.ADD_CART_ITEM, payload: product});
   }
 
 }

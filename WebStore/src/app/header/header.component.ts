@@ -16,10 +16,7 @@ export class HeaderComponent {
   numberOfCartItems$: Observable<number> ;
   constructor(private cartService: CartService)//, private store: Store<fromCartState.AppState>)
    {
-   /* let items=this.store.pipe(select(fromCartState.getCartItems$));
-    items.subscribe((i)=>console.log(i));*/
    this.numberOfCartItems$=
-   //this.store.pipe(select(fromCartState.getCartTotalQty$));//
    cartService.getTotalQuantity$();
 
   }

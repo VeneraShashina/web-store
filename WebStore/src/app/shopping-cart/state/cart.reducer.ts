@@ -2,7 +2,7 @@ import * as fromRoot from "../../state/app-state"
 import { CartAction, CartActionTypes } from "./cart.actions";
 import {createFeatureSelector, createSelector} from "@ngrx/store"
 import { CartState } from "./cart-state";
-import { CartHelper } from "src/app/services/carthelper";
+import { CartStateHelper } from "src/app/shopping-cart/state/cart-state-helper";
   export interface AppState extends fromRoot.AppState {
     cart: CartState
   }
@@ -26,14 +26,14 @@ export function shoppingCartReducer(state: CartState = initialState, action: Car
         case CartActionTypes.ADD_CART_ITEM: {
             return {
                 ...state,
-                items: CartHelper.addItem(state.items, action.payload)
+                items: CartStateHelper.addItem(state.items, action.payload)
             };
         }
 
         case CartActionTypes.DELETE_CART_ITEM: {
             return {
                 ...state,
-                items: CartHelper.deleteItem(state.items,action.payload)
+                items: CartStateHelper.deleteItem(state.items,action.payload)
             };
         }
 
@@ -52,9 +52,9 @@ export const getCartItems$= createSelector(
 
 export const getCartTotalQty$= createSelector(
     getShoppingCartFeatureState,
-    (state:CartState) => CartHelper.getTotalQuantity(state.items)
+    (state:CartState) => CartStateHelper.getTotalQuantity(state.items)
 )
     export const getCartTotalPrice$= createSelector(
         getShoppingCartFeatureState,
-        (state:CartState) => CartHelper.getTotalPrice(state.items)
+        (state:CartState) => CartStateHelper.getTotalPrice(state.items)
 )

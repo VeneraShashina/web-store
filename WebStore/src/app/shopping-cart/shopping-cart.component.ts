@@ -16,21 +16,12 @@ import * as fromCartState from './state/cart.reducer'
 export class ShoppingCartComponent {
 
   get cartItems$() {return this.cartService.cartItems$;}
-  //cartItems$ =new Observable<CartItem[]>;
- // items: CartItem[]=[]// this.cartService.getItems();
   constructor(private cartService: CartService, private store: Store<fromCartState.AppState>) {
   }
 
   ngOnInit()
   {
     this.store.dispatch({ type: CartActionTypes.LOAD_CART});
-   /* this.store.subscribe(state=>{ 
-          console.log(state);
-          this.items=state.cart.items;
-          console.log('loaded');
-        }); */
-
-     //   this.cartItems$ = this.store.pipe(select(fromCartState.getCartItems))
   }
 
   remove(item: CartItem) {

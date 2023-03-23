@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { CartItem } from "../model/cartItem";
-import { Product } from "../model/product";
+import { CartItem } from "../../model/cartItem";
+import { Product } from "../../model/product";
 
 @Injectable({
     providedIn: 'root'
   })
-  export class CartHelper {
+  export class CartStateHelper {
   
   
    static addItem(items: CartItem[], product: Product) {
