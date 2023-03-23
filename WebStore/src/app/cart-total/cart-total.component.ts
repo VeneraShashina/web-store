@@ -8,7 +8,9 @@ import { CartService } from '../services/cart.service';
 })
 export class CartTotalComponent {
 
-  totalPrice:number=this.cartService.getTotalPrice();
+  //totalPrice:number=this.cartService.getTotalPrice();
+
+  get totalPrice$() {return this.cartService.getTotalPrice$();}
   constructor(private cartService: CartService) {
   }
 }

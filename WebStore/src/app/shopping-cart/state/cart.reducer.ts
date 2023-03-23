@@ -8,7 +8,7 @@ import { CartHelper } from "src/app/services/carthelper";
   }
 
 const initialState: CartState = {
-    items: [//,
+    items: []/*,
        {
             product: {
                 id: 1,
@@ -37,7 +37,7 @@ const initialState: CartState = {
             quantity: 2,
             totalPrice: 333
         }
-    ],
+    ]*/,
     loading: false,
     loaded: false,
     error: ""
@@ -93,7 +93,7 @@ export function shoppingCartReducer(state: CartState = initialState, action: Car
         case CartActionTypes.DELETE_CART_ITEM: {
             return {
                 ...state,
-                items: state.items.filter(i=>i.product.id != action.payload.id)
+                items: CartHelper.deleteItem(state.items,action.payload)
             };
         }
         case CartActionTypes.DELETE_CART_ITEM_SUCCESS: {

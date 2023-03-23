@@ -15,7 +15,8 @@ import * as fromCartState from './state/cart.reducer'
 
 export class ShoppingCartComponent {
 
-  cartItems$ =new Observable<CartItem[]>;
+  get cartItems$() {return this.cartService.cartItems$;}
+  //cartItems$ =new Observable<CartItem[]>;
  // items: CartItem[]=[]// this.cartService.getItems();
   constructor(private cartService: CartService, private store: Store<fromCartState.AppState>) {
   }
@@ -29,11 +30,11 @@ export class ShoppingCartComponent {
           console.log('loaded');
         }); */
 
-        this.cartItems$ = this.store.pipe(select(fromCartState.getCartItems))
+     //   this.cartItems$ = this.store.pipe(select(fromCartState.getCartItems))
   }
 
   remove(item: CartItem) {
-    this.store.dispatch({ type: CartActionTypes.DELETE_CART_ITEM, payload: item});
-    console.log(item);
+   this.cartService.removeItem(item)
+    
     }
 }

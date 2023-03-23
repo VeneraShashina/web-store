@@ -48,7 +48,7 @@ export class AddCartItemFailed implements Action {
 
 export class DeleteCartItem implements Action {
     readonly type = CartActionTypes.DELETE_CART_ITEM
-    constructor(public payload: Product) { }
+    constructor(public payload: CartItem) { }
 }
 
 export class DeleteCartItemSuccess implements Action {
