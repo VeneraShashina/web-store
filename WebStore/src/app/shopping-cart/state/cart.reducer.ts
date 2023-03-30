@@ -1,11 +1,16 @@
 import * as fromRoot from "../../state/app-state"
-import { CartAction, CartActionTypes } from "./cart.actions";
-import {createFeatureSelector, createSelector} from "@ngrx/store"
+import {
+    addCartItem,
+    // CartAction, CartActionTypes, 
+    deleteCartItem, loadCart
+} from "./cart.actions";
+import { createFeatureSelector, createSelector } from "@ngrx/store"
 import { CartState } from "./cart-state";
 import { CartStateHelper } from "src/app/shopping-cart/state/cart-state-helper";
-  export interface AppState extends fromRoot.AppState {
+import { createReducer, on, props } from '@ngrx/store';
+export interface AppState extends fromRoot.AppState {
     cart: CartState
-  }
+}
 
 const initialState: CartState = {
     items: [],
@@ -13,6 +18,27 @@ const initialState: CartState = {
     error: ""
 };
 
+
+export const shoppingCartReducer = createReducer(
+    initialState,
+    on(loadCart, (state: CartState) => { return { ...state, loaded: true } }),
+    on(addCartItem, (state, actionProps) => {
+        return {
+            ...state,
+            items: CartStateHelper.addItem(state.items, actionProps.payload)
+        };
+    }),
+    on(deleteCartItem, (state, actionProps) => {
+        return {
+            ...state,
+            items: CartStateHelper.deleteItem(state.items, actionProps.payload)
+        };
+    }
+    )
+);
+
+
+/*
 export function shoppingCartReducer(state: CartState = initialState, action: CartAction):CartState {
     switch (action.type) {
 
@@ -41,20 +67,20 @@ export function shoppingCartReducer(state: CartState = initialState, action: Car
             return state;
         }
     }
-}
+}*/
 
 const getShoppingCartFeatureState = createFeatureSelector<CartState>("global")
 
-export const getCartItems$= createSelector(
+export const getCartItems$ = createSelector(
     getShoppingCartFeatureState,
-    (state:CartState) => state.items
+    (state: CartState) => state.items
 )
 
-export const getCartTotalQty$= createSelector(
+export const getCartTotalQty$ = createSelector(
     getShoppingCartFeatureState,
-    (state:CartState) => CartStateHelper.getTotalQuantity(state.items)
+    (state: CartState) => CartStateHelper.getTotalQuantity(state.items)
 )
-    export const getCartTotalPrice$= createSelector(
-        getShoppingCartFeatureState,
-        (state:CartState) => CartStateHelper.getTotalPrice(state.items)
+export const getCartTotalPrice$ = createSelector(
+    getShoppingCartFeatureState,
+    (state: CartState) => CartStateHelper.getTotalPrice(state.items)
 )

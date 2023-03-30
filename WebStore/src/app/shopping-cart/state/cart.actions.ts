@@ -1,7 +1,13 @@
-import { Action } from "@ngrx/store";
+import { Action, props } from "@ngrx/store";
 import { CartItem } from "src/app/model/cartItem";
 import { Product } from "src/app/model/product";
+import { createAction } from "@ngrx/store";
 
+export const loadCart = createAction('[CartState] Load Cart');
+export const addCartItem = createAction('[CartState] Add Cart Item', props<{payload:Product}>());
+export const deleteCartItem = createAction('[CartState] Delete Cart Item', props<{payload:CartItem}>());
+
+/*
 export enum CartActionTypes {
     LOAD_CART = "[CartState] Load Cart",
     ADD_CART_ITEM = "[CartState] Add Cart Item",
@@ -23,4 +29,5 @@ export class DeleteCartItem implements Action {
     constructor(public payload: CartItem) { }
 }
 
-export type CartAction = LoadCart | AddCartItem | DeleteCartItem 
+export type CartAction = LoadCart | AddCartItem | DeleteCartItem */
+

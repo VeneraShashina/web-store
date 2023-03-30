@@ -3,7 +3,7 @@ import { Store , select} from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/model/cartItem';
 import { CartService } from '../services/cart.service';
-import { CartActionTypes } from './state/cart.actions';
+//import { CartActionTypes } from './state/cart.actions';
 import * as fromCartState from './state/cart.reducer'
 
 @Component({
@@ -21,7 +21,7 @@ export class ShoppingCartComponent {
 
   ngOnInit()
   {
-    this.store.dispatch({ type: CartActionTypes.LOAD_CART});
+    this.cartService.loadCart();
   }
 
   remove(item: CartItem) {

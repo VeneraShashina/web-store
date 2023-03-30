@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store , select} from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartService } from '../services/cart.service';
-import { CartActionTypes } from '../shopping-cart/state/cart.actions';
+//import { CartActionTypes } from '../shopping-cart/state/cart.actions';
 import * as fromCartState from '../shopping-cart/state/cart.reducer'
 
 @Component({
