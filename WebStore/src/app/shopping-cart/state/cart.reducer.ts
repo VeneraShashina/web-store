@@ -8,11 +8,12 @@ import { createFeatureSelector, createSelector } from "@ngrx/store"
 import { CartState } from "./cart-state";
 import { CartStateHelper } from "src/app/shopping-cart/state/cart-state-helper";
 import { createReducer, on, props } from '@ngrx/store';
-export interface AppState extends fromRoot.AppState {
+import { AppState } from "../../state/app-state";
+/*export interface AppState extends fromRoot.AppState {
     cart: CartState
-}
+}*/
 
-const initialState: CartState = {
+const initialState: CartState= {
     items: [],
     loaded: false,
     error: ""
@@ -38,38 +39,7 @@ export const shoppingCartReducer = createReducer(
 );
 
 
-/*
-export function shoppingCartReducer(state: CartState = initialState, action: CartAction):CartState {
-    switch (action.type) {
-
-        case CartActionTypes.LOAD_CART: {
-            return {
-                ...state,
-                loaded: true,
-            };
-        }
-      
-        case CartActionTypes.ADD_CART_ITEM: {
-            return {
-                ...state,
-                items: CartStateHelper.addItem(state.items, action.payload)
-            };
-        }
-
-        case CartActionTypes.DELETE_CART_ITEM: {
-            return {
-                ...state,
-                items: CartStateHelper.deleteItem(state.items,action.payload)
-            };
-        }
-
-        default: {
-            return state;
-        }
-    }
-}*/
-
-const getShoppingCartFeatureState = createFeatureSelector<CartState>("global")
+const getShoppingCartFeatureState = createFeatureSelector<CartState>("cart")
 
 export const getCartItems$ = createSelector(
     getShoppingCartFeatureState,
