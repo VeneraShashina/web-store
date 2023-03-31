@@ -12,8 +12,6 @@ export class CartService {
 
   cartItems$ =new Observable<CartItem[]>;
   constructor(private store: Store<any>) {
-   
-  //  this.store.dispatch({type: CartActionTypes.LOAD_CART});
     this.cartItems$ = this.store.pipe(select(fromCartState.getCartItems$))
   }
 
@@ -24,17 +22,14 @@ export class CartService {
 
   addItem(product: Product) {
     this.store.dispatch(addCartItem({payload:product}));
-    //this.store.dispatch({type: CartActionTypes.ADD_CART_ITEM, payload:product});
   }
 
   removeItem(item: CartItem) {
     this.store.dispatch(deleteCartItem({payload:item}));
-    //this.store.dispatch({type: CartActionTypes.DELETE_CART_ITEM, payload:item});
   }
 
   getTotalQuantity$() {
     return this.store.pipe(select(fromCartState.getCartTotalQty$))
-
   }
 
   getTotalPrice$() {

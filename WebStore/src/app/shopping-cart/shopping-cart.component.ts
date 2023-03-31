@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { Store , select} from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/model/cartItem';
 import { CartService } from '../services/cart.service';
 import { AppState } from '../state/app-state';
-//import { CartActionTypes } from './state/cart.actions';
-import * as fromCartState from './state/cart.reducer'
 
 @Component({
   selector: 'app-shopping-cart',
