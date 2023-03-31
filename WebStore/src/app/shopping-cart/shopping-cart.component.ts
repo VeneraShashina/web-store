@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { Store , select} from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/model/cartItem';
 import { CartService } from '../services/cart.service';
-import { CartActionTypes } from './state/cart.actions';
-import * as fromCartState from './state/cart.reducer'
+import { AppState } from '../state/app-state';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -16,12 +14,12 @@ import * as fromCartState from './state/cart.reducer'
 export class ShoppingCartComponent {
 
   get cartItems$() {return this.cartService.cartItems$;}
-  constructor(private cartService: CartService, private store: Store<fromCartState.AppState>) {
+  constructor(private cartService: CartService, private store: Store<AppState>) {
   }
 
   ngOnInit()
   {
-    this.store.dispatch({ type: CartActionTypes.LOAD_CART});
+    this.cartService.loadCart();
   }
 
   remove(item: CartItem) {
