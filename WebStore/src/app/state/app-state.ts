@@ -3,11 +3,11 @@ import { CartState } from "../shopping-cart/state/cart-state";
 import * as fromCartState from "../shopping-cart/state/cart.reducer";
 import { hydrationMetaReducer } from "../hydration/hydration.reducer";
 export interface AppState {
-  //state:CartState
+  cart:CartState
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-    global: fromCartState.shoppingCartReducer
+    cart: fromCartState.shoppingCartReducer
    }
 
    export const metaReducers: MetaReducer[] = [

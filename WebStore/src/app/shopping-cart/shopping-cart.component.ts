@@ -3,6 +3,7 @@ import { Store , select} from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartItem } from 'src/app/model/cartItem';
 import { CartService } from '../services/cart.service';
+import { AppState } from '../state/app-state';
 //import { CartActionTypes } from './state/cart.actions';
 import * as fromCartState from './state/cart.reducer'
 
@@ -16,7 +17,7 @@ import * as fromCartState from './state/cart.reducer'
 export class ShoppingCartComponent {
 
   get cartItems$() {return this.cartService.cartItems$;}
-  constructor(private cartService: CartService, private store: Store<fromCartState.AppState>) {
+  constructor(private cartService: CartService, private store: Store<AppState>) {
   }
 
   ngOnInit()
