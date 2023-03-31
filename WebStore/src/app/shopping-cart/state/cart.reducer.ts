@@ -1,19 +1,10 @@
-import * as fromRoot from "../../state/app-state"
-import {
-    addCartItem,
-    // CartAction, CartActionTypes, 
-    deleteCartItem, loadCart
-} from "./cart.actions";
+import { addCartItem, deleteCartItem, loadCart } from "./cart.actions";
 import { createFeatureSelector, createSelector } from "@ngrx/store"
 import { CartState } from "./cart-state";
 import { CartStateHelper } from "src/app/shopping-cart/state/cart-state-helper";
 import { createReducer, on, props } from '@ngrx/store';
-import { AppState } from "../../state/app-state";
-/*export interface AppState extends fromRoot.AppState {
-    cart: CartState
-}*/
 
-const initialState: CartState= {
+const initialState: CartState = {
     items: [],
     loaded: false,
     error: ""

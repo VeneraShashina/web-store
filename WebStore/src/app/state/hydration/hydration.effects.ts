@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType, OnInitEffects } from "@ngrx/effects";
 import { Action, Store } from "@ngrx/store";
 import { distinctUntilChanged, map, switchMap, tap } from "rxjs/operators";
-import { AppState } from "../state/app-state";
+import { AppState } from "../app-state";
 import * as HydrationActions from "./hydration.actions";
 
 @Injectable()
@@ -15,6 +15,7 @@ export class HydrationEffects implements OnInitEffects {
         if (storageValue) {
           try {
             const state = JSON.parse(storageValue);
+         //   console.log(`getting state from local storage ${storageValue}`)
             return HydrationActions.hydrateSuccess({ state });
           } catch {
             localStorage.removeItem("state");
@@ -34,12 +35,16 @@ export class HydrationEffects implements OnInitEffects {
         ),
         switchMap(() => this.store),
         distinctUntilChanged(),
-        tap(state => localStorage.setItem("state", JSON.stringify(state)))
+        tap(state => {
+          const storageValue=JSON.stringify(state)
+          localStorage.setItem("state", storageValue);
+       //   console.log(`saved  state to local storage ${storageValue}`);
+        })
       ),
     { dispatch: false }
   );
 
-  constructor(private action$: Actions, private store: Store<AppState>) {}
+  constructor(private action$: Actions, private store: Store<AppState>) { }
 
   ngrxOnInitEffects(): Action {
     return HydrationActions.hydrate();

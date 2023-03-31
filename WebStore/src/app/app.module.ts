@@ -8,9 +8,8 @@ import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
-//import { shoppingCartReducer } from './shopping-cart/state/cart.reducer';
 import { reducers,metaReducers } from './state/app-state';
-import { HydrationEffects } from './hydration/hydration.effects';
+import { HydrationEffects } from './state/hydration/hydration.effects';
 
 
 @NgModule({
